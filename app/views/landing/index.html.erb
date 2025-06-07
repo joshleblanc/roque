@@ -7,7 +7,11 @@
     <% if authenticated? %>
       <p class="landing__cta-text">Sign in with Discord to allow the bot to message you</p>
       <%= button_to "✅ Sign in to Discord", "#", class: "landing__cta-link disabled" %>
-      <a href="https://discord.com/oauth2/authorize?client_id=1379766186627170344" target="_blank" class="landing__cta-link">Allow Bot to Message You</a>
+      <% if Rails.env.production? %>
+        <a href="https://discord.com/oauth2/authorize?client_id=1381027189776187474" target="_blank" class="landing__cta-link">Allow Bot to Message You</a>
+      <% else %>
+        <a href="https://discord.com/oauth2/authorize?client_id=1379766186627170344" target="_blank" class="landing__cta-link">Allow Bot to Message You</a>
+      <% end %>
     <% else %>
       <p class="landing__cta-text">Sign in with Discord to allow the bot to message you</p>
       <%= button_to "Sign in to Discord", "/auth/discord", method: :post, data: { turbo: false }, class: "landing__cta-link" %>
