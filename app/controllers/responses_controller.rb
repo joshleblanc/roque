@@ -3,7 +3,7 @@ class ResponsesController < ApplicationController
 
   # GET /responses or /responses.json
   def index
-    @responses = Response.all
+    @responses = Current.user.responses
   end
 
   # GET /responses/1 or /responses/1.json
@@ -58,13 +58,14 @@ class ResponsesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_response
-      @response = Response.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def response_params
-      params.expect(response: [ :prompt_id, :discord_uid ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_response
+    @response = Response.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def response_params
+    params.expect(response: [:prompt_id, :discord_uid])
+  end
 end

@@ -4,13 +4,11 @@
 
 <h1>Responses</h1>
 
-<div id="responses">
+<div class="responses-list">
   <% @responses.each do |response| %>
-    <%= render response %>
-    <p>
-      <%= link_to "Show this response", response %>
+    <p class="responses-list__item">
+      <%= response.prompt.content %><br>
+      &rarr; <%= response.content %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New response", new_response_path %>

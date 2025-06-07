@@ -19,6 +19,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'responses', media: 'all' %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -28,6 +29,7 @@
         <a class="navbar__brand" href="/">Prompt Bot</a>
         <div class="navbar__actions">
           <% if authenticated? %>
+            <%= link_to 'Responses', responses_path, class: 'navbar__button' %>
             <%= link_to 'Profile', edit_profile_path, class: 'navbar__button' %>
             <%= button_to 'Log out', session_path, method: :delete, class: 'navbar__button navbar__button--logout' %>
           <% else %>

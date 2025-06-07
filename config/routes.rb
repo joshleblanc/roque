@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # resources :responses
+  resources :responses, except: [:create, :new]
   # resources :prompts
   resource :session
   resources :passwords, param: :token
