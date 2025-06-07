@@ -1,5 +1,11 @@
 <div class="profile">
+  <% if notice %>
+    <div class="profile__notice"><%= notice %></div>
+  <% end %>
   <h1 class="profile__title">Profile Settings</h1>
+  <p class="profile__hint">
+    Notification changes will apply to the next scheduled prompt, not neccessarily the next prompt sent
+  </p>
   <%= form_with model: @user, url: profile_path, method: :patch, local: true, class: "profile__form" do |f| %>
     <div class="profile__field">
       <%= f.label :time_zone, "Time Zone", class: "profile__label" %>

@@ -9,11 +9,19 @@ class Bot
     )
 
     @bot.message do |event|
-      puts event.content
+      connected_service = ConnectedService.find_by(uid: event.user.id)
+      return unless connected_service
+
+      Response.create!(prompt: Prompt.current, discord_uid: event.user.id, content: event.message.content)
     end
   end
 
   def run
     @bot.run
+  end
+
+  def send_dm(uid, content)
+    channel = @bot.pm_channel(uid)
+    channel.send_message(content)
   end
 end

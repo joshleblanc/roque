@@ -4,7 +4,15 @@
     This bot generates a poetry prompt every day, and DMs it to you. You can reply directly in the private message. Sign in with Discord to see all your responses.
   </p>
   <div class="landing__cta">
-    <a href="https://discord.com/oauth2/authorize?client_id=1379766186627170344" target="_blank" class="landing__cta-link">➕ Add Bot to Discord</a>
+    <% if authenticated? %>
+      <p class="landing__cta-text">Sign in with Discord to allow the bot to message you</p>
+      <%= button_to "✅ Sign in to Discord", "#", class: "landing__cta-link disabled" %>
+      <a href="https://discord.com/oauth2/authorize?client_id=1379766186627170344" target="_blank" class="landing__cta-link">Allow Bot to Message You</a>
+    <% else %>
+      <p class="landing__cta-text">Sign in with Discord to allow the bot to message you</p>
+      <%= button_to "Sign in to Discord", "/auth/discord", method: :post, data: { turbo: false }, class: "landing__cta-link" %>
+      <a href="#" target="_blank" class="landing__cta-link disabled">Allow Bot to Message You</a>
+    <% end %>
   </div>
   <h2 class="landing__section-title">Recent Prompts</h2>
   <ul class="landing__prompts">

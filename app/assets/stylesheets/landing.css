@@ -19,6 +19,12 @@
 
 .landing__cta {
   margin: 2em 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.landing__cta-text {
+  width: 100%;
 }
 
 .landing__cta-link {
@@ -31,6 +37,10 @@
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(88,101,242,0.15);
   transition: background 0.2s;
+}
+
+.landing__cta-link:first-child {
+  margin-right: 1em;
 }
 
 .landing__cta-link:hover {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_07_192259) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_07_212607) do
   create_table "connected_services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_192259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "retry_count", default: 0
+    t.boolean "current"
   end
 
   create_table "responses", force: :cascade do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_192259) do
     t.binary "embedding"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content"
     t.index ["discord_uid"], name: "index_responses_on_discord_uid"
     t.index ["prompt_id"], name: "index_responses_on_prompt_id"
   end

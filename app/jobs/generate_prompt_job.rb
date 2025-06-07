@@ -12,13 +12,17 @@ class GeneratePromptJob < ApplicationJob
     )
     content = response.choices.first[:message][:content]
     embedding = Embedding.create(content)
-    prompt = Prompt.new(content:, embedding: embedding.embedding, retry_count: context.count)
+    prompt = Prompt.new(content:, embedding: embedding.embedding, retry_count: context.count, current: true)
     neighbor = prompt.nearest_neighbors(:embedding, distance: "euclidean").first
     if neighbor && neighbor.neighbor_distance < 0.4
       context << content
       GeneratePromptJob.perform_later(context)
     else
+      Prompt.update_all(current: false)
       prompt.save!
+      User.find_each do |user|
+        user.send_prompt_later(prompt)
+      end
     end
   end
 end
