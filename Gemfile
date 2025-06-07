@@ -74,3 +74,5 @@ gem "neighbor", "~> 0.5.2"
 gem "sqlite-vec", "~> 0.1.6"
 
 gem "informers", "~> 1.2"
+
+gem "discordrb", "~> 3.5"

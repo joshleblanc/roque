@@ -1,0 +1,24 @@
+<div class="landing">
+  <h1 class="landing__title">Welcome to the Discord Prompt Bot!</h1>
+  <p class="landing__description">
+    This bot generates a poetry prompt every day, and DMs it to you. You can reply directly in the private message. Sign in with Discord to see all your responses.
+  </p>
+  <div class="landing__cta">
+    <a href="https://discord.com/oauth2/authorize?client_id=1379766186627170344" target="_blank" class="landing__cta-link">➕ Add Bot to Discord</a>
+  </div>
+  <h2 class="landing__section-title">Recent Prompts</h2>
+  <ul class="landing__prompts">
+    <% if @recent_prompts.any? %>
+      <% @recent_prompts.each do |prompt| %>
+        <li class="landing__prompt-item">
+          <span class="landing__prompt-content"><%= prompt.content %></span>
+          <span class="landing__prompt-date">
+            <%= prompt.created_at.strftime("%b %d, %Y %H:%M") %>
+          </span>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="landing__no-prompts">No prompts yet. Be the first to add one!</li>
+    <% end %>
+  </ul>
+</div>

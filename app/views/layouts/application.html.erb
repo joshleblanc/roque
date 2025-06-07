@@ -23,6 +23,18 @@
   </head>
 
   <body>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a class="navbar__brand" href="/">Prompt Bot</a>
+        <div class="navbar__actions">
+          <% if authenticated? %>
+            <%= button_to 'Log out', session_path, method: :delete, class: 'navbar__button navbar__button--logout' %>
+          <% else %>
+            <%= button_to 'Sign in with Discord', '/auth/discord', class: 'navbar__button navbar__button--signin', method: :post, data: { turbo: false } %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
