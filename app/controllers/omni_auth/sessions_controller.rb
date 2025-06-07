@@ -1,4 +1,6 @@
 class OmniAuth::SessionsController < ApplicationController
+  include TimeZone
+
   allow_unauthenticated_access only: [:create, :failure]
   before_action :set_service, only: [:create]
   before_action :set_user, only: [:create]
@@ -55,6 +57,10 @@ class OmniAuth::SessionsController < ApplicationController
 
   def create_user
     email = user_info.dig(:info, :email)
-    User.create!(email_address: email, password: SecureRandom.hex(10))
+    p "Creating user"
+    p browser_time_zone
+    p cookies[:browser_time_zone]
+    p cookies
+    User.create!(email_address: email, password: SecureRandom.hex(10), time_zone: browser_time_zone.name)
   end
 end

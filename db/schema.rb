@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_134926) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_07_192259) do
   create_table "connected_services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -52,6 +52,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_134926) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "time_zone"
+    t.integer "notification_hour", default: 6
+    t.integer "notification_minute", default: 0
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

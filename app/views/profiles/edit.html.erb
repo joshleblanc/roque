@@ -1,0 +1,20 @@
+<div class="profile">
+  <h1 class="profile__title">Profile Settings</h1>
+  <%= form_with model: @user, url: profile_path, method: :patch, local: true, class: "profile__form" do |f| %>
+    <div class="profile__field">
+      <%= f.label :time_zone, "Time Zone", class: "profile__label" %>
+      <%= f.time_zone_select :time_zone, nil, { default: browser_time_zone.name }, class: "profile__select" %>
+    </div>
+    <div class="profile__field">
+      <%= f.label :notification_hour, "Notification Hour (0-23)", class: "profile__label" %>
+      <%= f.number_field :notification_hour, in: 0..23, class: "profile__input" %>
+    </div>
+    <div class="profile__field">
+      <%= f.label :notification_minute, "Notification Minute (0-59)", class: "profile__label" %>
+      <%= f.number_field :notification_minute, in: 0..59, class: "profile__input" %>
+    </div>
+    <div class="profile__actions">
+      <%= f.submit "Update Profile", class: "profile__submit" %>
+    </div>
+  <% end %>
+</div>
