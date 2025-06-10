@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   def send_prompt_later(prompt)
     Time.use_zone(time_zone) do
-      target = Time.zone.now.change(hour: notification_hour, min: notification_minute)
-      if target <= Time.zone.now
+      target = Time.current.change(hour: notification_hour, min: notification_minute)
+      if target <= Time.current
         target += 1.day
       end
       SendPromptJob.set(wait_until: target).perform_later(self, prompt)

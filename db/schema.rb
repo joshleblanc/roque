@@ -54,9 +54,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_212607) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "time_zone"
     t.integer "notification_hour", default: 6
     t.integer "notification_minute", default: 0
+    t.string "time_zone"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
