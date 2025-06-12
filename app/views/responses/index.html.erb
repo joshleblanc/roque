@@ -6,9 +6,9 @@
 
 <div class="responses-list">
   <% @responses.each do |response| %>
-    <p class="responses-list__item">
+    <div class="responses-list__item">
       <%= response.prompt.content %><br>
-      &rarr; <%= response.content %>
-    </p>
+      <% response.content.lines.each_with_index do |line, index| %><span class="<%= class_names(hidden: index > 0) %>" >&rarr;</span> <%= line %><br><% end %>
+    </div>
   <% end %>
 </div>

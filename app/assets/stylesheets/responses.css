@@ -8,6 +8,10 @@
   padding: 2rem 2.5rem;
 }
 
+.responses-list__content {
+  white-space: pre-line;
+}
+
 .responses-list__item {
   padding: 1.2rem 1rem;
   margin-bottom: 1.5rem;
