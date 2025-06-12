@@ -21,6 +21,7 @@
   margin: 2em 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .landing__cta-text {
@@ -37,10 +38,8 @@
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(88,101,242,0.15);
   transition: background 0.2s;
-}
-
-.landing__cta-link:first-child {
-  margin-right: 1em;
+  text-align: center;
+  margin: 0.25em;
 }
 
 .landing__cta-link:hover {
