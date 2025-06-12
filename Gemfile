@@ -69,7 +69,7 @@ gem "venice_client", "~> 1.0"
 
 gem "omniauth-discord", "~> 1.2"
 
-gem "neighbor", "~> 0.5.2"
+gem "neighbor", "~> 0.6.0"
 
 gem "sqlite-vec", "~> 0.1.6"
 
