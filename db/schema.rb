@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_07_212607) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_12_103414) do
   create_table "connected_services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -36,7 +36,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_212607) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
+    t.string "message_id"
     t.index ["discord_uid"], name: "index_responses_on_discord_uid"
+    t.index ["message_id"], name: "index_responses_on_message_id"
     t.index ["prompt_id"], name: "index_responses_on_prompt_id"
   end
 
@@ -57,10 +59,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_212607) do
     t.integer "notification_hour", default: 6
     t.integer "notification_minute", default: 0
     t.string "time_zone"
+    t.integer "last_sent_prompt_id", default: 36, null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["last_sent_prompt_id"], name: "index_users_on_last_sent_prompt_id"
   end
 
   add_foreign_key "connected_services", "users"
   add_foreign_key "responses", "prompts"
   add_foreign_key "sessions", "users"
+  add_foreign_key "users", "prompts", column: "last_sent_prompt_id"
 end

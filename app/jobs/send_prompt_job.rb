@@ -6,5 +6,6 @@ class SendPromptJob < ApplicationJob
     return unless discord
 
     Bot.instance.send_dm(discord.uid, prompt.content)
+    user.update!(last_sent_prompt: prompt)
   end
 end

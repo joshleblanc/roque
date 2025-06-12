@@ -12,7 +12,18 @@ class Bot
       connected_service = ConnectedService.find_by(uid: event.user.id)
       return unless connected_service
 
-      Response.create!(prompt: Prompt.current, discord_uid: event.user.id, content: event.message.content)
+      user = connected_service.user
+      Response.create!(prompt: user.last_sent_prompt, discord_uid: event.user.id, content: event.message.content, message_id: event.message.id)
+    end
+
+    @bot.message_edit do |event|
+      connected_service = ConnectedService.find_by(uid: event.user.id)
+      return unless connected_service
+
+      response = Response.find_by(message_id: event.message.id)
+      return unless response
+
+      response.update(content: event.message.content)
     end
   end
 
