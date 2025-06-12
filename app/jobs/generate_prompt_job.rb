@@ -21,7 +21,11 @@ class GeneratePromptJob < ApplicationJob
       Prompt.update_all(current: false)
       prompt.save!
       User.find_each do |user|
-        user.send_prompt_later(prompt)
+        if Rails.env.development?
+          user.send_prompt_now(prompt)
+        else
+          user.send_prompt_later(prompt)
+        end
       end
     end
   end

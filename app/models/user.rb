@@ -4,7 +4,13 @@ class User < ApplicationRecord
   has_many :connected_services, dependent: :destroy
   has_many :responses, through: :connected_services
 
+  belongs_to :last_sent_prompt, class_name: "Prompt"
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+
+  def send_prompt_now(prompt)
+    SendPromptJob.perform_now(self, prompt)
+  end
 
   def send_prompt_later(prompt)
     Time.use_zone(time_zone) do
