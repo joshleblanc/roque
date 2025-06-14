@@ -25,7 +25,9 @@
         <li class="landing__prompt-item">
           <span class="landing__prompt-content"><%= prompt.content %></span>
           <span class="landing__prompt-date">
-            <%= prompt.created_at.strftime("%b %d, %Y %H:%M") %>
+            <% Time.use_zone(Current.user&.time_zone) do %>
+              <%= prompt.created_at.strftime("%b %d, %Y %H:%M") %>
+            <% end %>
           </span>
         </li>
       <% end %>
