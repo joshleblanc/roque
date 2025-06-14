@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :responses, except: [:create, :new]
   # resources :prompts
-  resource :session
+  resource :session, only: [:destroy]
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
