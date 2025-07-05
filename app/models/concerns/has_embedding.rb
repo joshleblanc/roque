@@ -2,7 +2,7 @@ module HasEmbedding
   extend ActiveSupport::Concern
 
   included do
-    has_neighbors :embedding, dimensions: 768
+    has_neighbors :embedding, dimensions: 1024
   end
 
   def create_embedding!
