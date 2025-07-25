@@ -1,5 +1,17 @@
 class GeneratePromptJob < ApplicationJob
   def perform(context = [])
+    # Get recent successful prompts for broader context awareness
+    recent_prompts = Prompt.where(current: false)
+                          .order(created_at: :desc)
+                          .limit(10)
+                          .pluck(:content)
+    
+    # Build enhanced context message
+    context_parts = []
+    context_parts << "Recent successful prompts: #{recent_prompts.join('; ')}" if recent_prompts.any?
+    context_parts << "Rejected attempts this session: #{context.join('; ')}" if context.any?
+    context_message = context_parts.join("\n\n")
+    
     client = VeniceClient::ChatApi.new
     response = client.create_chat_completion(
       body: {
@@ -29,7 +41,9 @@ THEMATIC CATEGORIES (rotate between):
 - Family dynamics and traditions
 - Creative breakthroughs or failures
 
-Keep prompts grounded, emotionally resonant, and accessible. Avoid personification. Each prompt should feel fresh and invite genuine personal reflection. Keep to one sentence. These are prompts you've already used: #{context.join("\n")}" },
+Keep prompts grounded, emotionally resonant, and accessible. Avoid personification. Each prompt should feel fresh and invite genuine personal reflection. Keep to one sentence.
+
+#{context_message}" },
           { role: "user", content: "Every day, you must provide a prompt to inspire your students. Your students will write a poem that draws on their own emotions and experiences. Generate a prompt that invites them to explore a personal, emotionally charged moment or memory in one sentence. Only respond with the prompt, nothing else." },
         ],
       },
